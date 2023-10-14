@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Englishease</string>
+    <string name="general_english">General English</string>
+    <string name="english_work">English For Work</string>
+    <string name="english_study">English For Study</string>
+    <string name="english_travel">English For Travel</string>
+    <string name="general_eng_desc">If you want to learn for yourself, watch movies, listen music, make friends</string>
+    <string name="english_work_desc">If you need to relocate and work in English speaking company</string>
+    <string name="english_study_desc">"If you need to improve grades, study for exams, brush up on English "</string>
+    <string name="english_travel_desc">If you need to speak with foreigners, travel, live in another country</string>
+    <string name="choose_course_title">Choose the course</string>
+    <string name="choose_course_desc">Why do you want to learn English</string>
+    <string name="english_it">English For IT workers</string>
+    <string name="english_it_desc">Best solution for programmers, who want to level up their English skills</string>
+    <string name="englsih_kids">Englsih For Kids 6+</string>
+    <string name="english_kids_desc">Childhood is the best time to teach your child a foreign language</string>
+</resources>
