@@ -3,6 +3,7 @@ package com.example.englishease
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -17,24 +18,24 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.example.compose.AppTheme
-import com.example.englishease.ui.lessons.InnerContent
+import com.example.englishease.ui.NavigationItem
+import com.example.englishease.ui.lessons.LessonsScreen
+import com.example.englishease.ui.practise.PracticeScreen
+import com.example.englishease.ui.profile.ProfileScreen
 
-data class BottomNavigationItem(
-    val title: String, val selectedIcon: Painter, val unselectedIcon: Painter
-)
-
-@OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,16 +45,39 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Scaffold(
-                        topBar = {
-                            MyTopAppBar()
-                        }, bottomBar = {
-                            MyBottomAppBar()
-                        }) {
-                        InnerContent(Modifier.padding(it))
-                    }
+                    MainScreen()
                 }
             }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MainScreen() {
+    val navController = rememberNavController()
+    Scaffold(
+        topBar = { MyTopAppBar() },
+        bottomBar = { BottomNavigationBar(navController) },
+        content = {
+            Box(modifier = Modifier.padding(it)) {
+                Navigation(navController = navController)
+            }
+        }
+    )
+}
+
+@Composable
+fun Navigation(navController: NavHostController) {
+    NavHost(navController = navController, startDestination = NavigationItem.Lessons.route) {
+        composable(NavigationItem.Lessons.route) {
+            LessonsScreen()
+        }
+        composable(NavigationItem.Practice.route) {
+            PracticeScreen()
+        }
+        composable(NavigationItem.Profile.route) {
+            ProfileScreen()
         }
     }
 }
@@ -68,51 +92,49 @@ fun MyTopAppBar() {
         ),
         title = {
             Text(
-                text = stringResource(R.string.app_name), fontWeight = FontWeight.Bold
+                text = stringResource(R.string.app_name),
+                fontWeight = FontWeight.Bold
             )
         }
     )
 }
 
 @Composable
-fun MyBottomAppBar() {
-
-    var selectedItemIndex by rememberSaveable { mutableIntStateOf(0) }
-
+fun BottomNavigationBar(navController: NavController) {
     val items = listOf(
-        BottomNavigationItem(
-            title = "Lessons",
-            selectedIcon = painterResource(R.drawable.book),
-            unselectedIcon = painterResource(R.drawable.book)
-        ), BottomNavigationItem(
-            title = "Practise",
-            selectedIcon = painterResource(R.drawable.practise),
-            unselectedIcon = painterResource(R.drawable.practise)
-        ), BottomNavigationItem(
-            title = "Profile",
-            selectedIcon = painterResource(R.drawable.user),
-            unselectedIcon = painterResource(R.drawable.user)
-        )
+        NavigationItem.Lessons,
+        NavigationItem.Practice,
+        NavigationItem.Profile
     )
 
     NavigationBar {
-        items.forEachIndexed { index, item ->
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentRoute = navBackStackEntry?.destination?.route
+
+        items.forEach { item ->
             NavigationBarItem(
-                selected = selectedItemIndex == index,
-                onClick = {
-                    selectedItemIndex = index
-//                navController.navigate(Screen.Lessons.route)
-//                navController.navigate(item.title)
-                },
                 label = { Text(item.title) },
                 icon = {
                     Icon(
-                        painter = if (index == selectedItemIndex) item.selectedIcon
-                        else item.unselectedIcon,
+                        painter = painterResource(item.icon),
                         contentDescription = item.title,
                         modifier = Modifier.size(25.dp)
                     )
-                })
+                },
+                selected = currentRoute == item.route,
+                onClick = {
+                    navController.navigate(item.route)
+                    {
+                        navController.graph.startDestinationRoute?.let { route ->
+                            popUpTo(route) {
+                                saveState = true
+                            }
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
+            )
         }
     }
 }

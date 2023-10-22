@@ -23,11 +23,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.example.englishease.R
 
 @Composable
-fun InnerContent(modifier: Modifier = Modifier) {
+fun LessonsScreen(modifier: Modifier = Modifier) {
 
     val travelImg = painterResource(R.drawable.travel)
     val businessImg = painterResource(R.drawable.business)
@@ -168,6 +167,5 @@ fun ShowCard(
                     .wrapContentHeight(Alignment.CenterVertically)
             )
         }
-
     }
 }
