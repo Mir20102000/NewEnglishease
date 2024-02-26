@@ -1,4 +1,7 @@
-package com.example.compose
+package com.example.englishease.ui.theme
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 val md_theme_light_primary = Color(0xFF7B5800)
@@ -65,3 +68,21 @@ val md_theme_dark_scrim = Color(0xFF000000)
 
 
 val seed = Color(0xFFEAAB00)
+
+
+// These colors from login screen tutorial (MUST REPLACE WITH MY THEME COLORS)
+val Black = Color(0xFF000113)
+val LightBlueWhite = Color(0xFFF1F5F9) //Social media background
+val BlueGray = Color(0xFF334155)
+
+val ColorScheme.focusedTextFieldText
+    @Composable
+    get() = if (isSystemInDarkTheme()) Color.White else Color.Black
+
+val ColorScheme.unfocusedTextFieldText
+    @Composable
+    get() = if (isSystemInDarkTheme()) Color(0xFF94A3B8) else Color(0xFF475569)
+
+val ColorScheme.textFieldContainer
+    @Composable
+    get() = if (isSystemInDarkTheme()) BlueGray.copy(alpha = 0.6f) else LightBlueWhite

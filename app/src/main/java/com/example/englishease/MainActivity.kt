@@ -30,9 +30,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.compose.AppTheme
+import com.example.englishease.ui.theme.AppTheme
 import com.example.englishease.ui.NavigationItem
 import com.example.englishease.ui.lessons.LessonsScreen
+import com.example.englishease.ui.login.LoginScreen
 import com.example.englishease.ui.practise.PracticeScreen
 import com.example.englishease.ui.profile.ProfileScreen
 
@@ -45,7 +46,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen()
+//                    MainScreen()
+                    LoginScreen()
                 }
             }
         }
