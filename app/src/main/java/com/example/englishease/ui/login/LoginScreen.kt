@@ -36,9 +36,12 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import com.example.englishease.ui.theme.Black
 import com.example.englishease.R
+import com.example.englishease.ui.NavigationItem
 import com.example.englishease.ui.theme.BlueGray
 import com.example.englishease.ui.theme.Roboto
 import com.example.englishease.ui.theme.ScreenOrientation
@@ -166,6 +169,7 @@ private fun SocialMediaSection() {
 
 @Composable
 private fun LoginSection() {
+    val navController = rememberNavController()
     LoginTextField(
         label = "Email",
         trailing = "",
@@ -186,7 +190,19 @@ private fun LoginSection() {
         modifier = Modifier
             .fillMaxWidth()
             .height(MaterialTheme.dimens.buttonHeight),
-        onClick = { /*TODO*/ },
+        onClick = {
+                  // Поменять что-то здесь
+//            navController.navigate(NavigationItem.Login.route)
+//            {
+//                navController.graph.startDestinationRoute?.let { route ->
+//                    popUpTo(route) {
+//                        saveState = true
+//                    }
+//                }
+//                launchSingleTop = true
+//                restoreState = true
+//            }
+                  },
         colors = ButtonDefaults.buttonColors(
             containerColor = if (isSystemInDarkTheme()) BlueGray else Black,
             contentColor = Color.White
@@ -251,3 +267,16 @@ private fun TopSection() {
         )
     }
 }
+
+//@Preview
+//@Composable
+//fun LoginScreenPreview() {
+//    Surface() {
+//        if (ScreenOrientation == Configuration.ORIENTATION_PORTRAIT) {
+//            PortraitLoginScreen()
+//        } else {
+//            LandscapeLoginScreen()
+//        }
+//
+//    }
+//}

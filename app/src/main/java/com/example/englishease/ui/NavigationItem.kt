@@ -19,4 +19,10 @@ sealed class NavigationItem(var route: String, var icon: Int, var title: String)
         icon = R.drawable.user,
         title = "Profile"
     )
+
+    object Login : NavigationItem(
+        route = "login",
+        icon = R.drawable.book,
+        title = "Login"
+    )
 }
