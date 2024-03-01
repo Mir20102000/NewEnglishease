@@ -1,7 +1,11 @@
 package com.example.englishease.ui
 import com.example.englishease.R
 
-sealed class NavigationItem(var route: String, var icon: Int, var title: String) {
+sealed class NavigationItem(
+    var route: String,
+    var icon: Int,
+    var title: String
+) {
     object Lessons : NavigationItem(
         route = "lessons",
         icon = R.drawable.book,
@@ -22,7 +26,7 @@ sealed class NavigationItem(var route: String, var icon: Int, var title: String)
 
     object Login : NavigationItem(
         route = "login",
-        icon = R.drawable.book,
+        icon = R.drawable.book, // can't pass null
         title = "Login"
     )
 }

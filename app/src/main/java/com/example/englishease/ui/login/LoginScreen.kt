@@ -38,42 +38,43 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.englishease.ui.theme.Black
 import com.example.englishease.R
 import com.example.englishease.ui.NavigationItem
 import com.example.englishease.ui.theme.BlueGray
-import com.example.englishease.ui.theme.Roboto
+//import com.example.englishease.ui.theme.Roboto
 import com.example.englishease.ui.theme.ScreenOrientation
 import com.example.englishease.ui.theme.dimens
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavHostController) {
     Surface() {
         if (ScreenOrientation == Configuration.ORIENTATION_PORTRAIT) {
-            PortraitLoginScreen()
+            PortraitLoginScreen(navController)
         } else {
-            LandscapeLoginScreen()
+            LandscapeLoginScreen(navController)
         }
 
     }
 }
 
 @Composable
-private fun LandscapeLoginScreen() {
+private fun LandscapeLoginScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 30.dp),
         verticalArrangement = Arrangement.Center
     ) {
-        LoginSection()
+        LoginSection(navController)
         SocialMediaSection()
     }
 }
 
 @Composable
-private fun PortraitLoginScreen() {
+private fun PortraitLoginScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -87,7 +88,7 @@ private fun PortraitLoginScreen() {
                 .padding(horizontal = 30.dp)
         ) {
 
-            LoginSection()
+            LoginSection(navController)
 
             Spacer(modifier = Modifier.height(MaterialTheme.dimens.medium1))
 
@@ -110,7 +111,7 @@ private fun ColumnScope.CreateAccountSection() {
                 style = SpanStyle(
                     color = Color(0XFF64748B),
                     fontSize = MaterialTheme.typography.labelMedium.fontSize,
-                    fontFamily = Roboto,
+//                    fontFamily = Roboto,
                     fontWeight = FontWeight.Normal
                 )
             ) {
@@ -120,7 +121,7 @@ private fun ColumnScope.CreateAccountSection() {
                 style = SpanStyle(
                     color = uiColor,
                     fontSize = MaterialTheme.typography.labelMedium.fontSize,
-                    fontFamily = Roboto,
+//                    fontFamily = Roboto,
                     fontWeight = FontWeight.Normal
                 )
             ) {
@@ -168,8 +169,8 @@ private fun SocialMediaSection() {
 }
 
 @Composable
-private fun LoginSection() {
-    val navController = rememberNavController()
+private fun LoginSection(navController: NavHostController) {
+//    val navController = rememberNavController()
     LoginTextField(
         label = "Email",
         trailing = "",
@@ -191,17 +192,8 @@ private fun LoginSection() {
             .fillMaxWidth()
             .height(MaterialTheme.dimens.buttonHeight),
         onClick = {
-                  // Поменять что-то здесь
-//            navController.navigate(NavigationItem.Login.route)
-//            {
-//                navController.graph.startDestinationRoute?.let { route ->
-//                    popUpTo(route) {
-//                        saveState = true
-//                    }
-//                }
-//                launchSingleTop = true
-//                restoreState = true
-//            }
+            // problem here
+            navController.navigate(NavigationItem.Lessons.route)
                   },
         colors = ButtonDefaults.buttonColors(
             containerColor = if (isSystemInDarkTheme()) BlueGray else Black,

@@ -37,8 +37,8 @@ import com.example.englishease.ui.profile.ProfileScreen
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
-    var showTopBar by rememberSaveable { mutableStateOf(true) }
-    var showBottomBar by rememberSaveable { mutableStateOf(true) }
+    var showTopBar by rememberSaveable { mutableStateOf(true) } // to hide top bar in login screen
+    var showBottomBar by rememberSaveable { mutableStateOf(true) } // to hide bottom bar in login screen
     val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     showTopBar = when (navBackStackEntry?.destination?.route) {
@@ -75,7 +75,7 @@ fun Navigation(navController: NavHostController) {
             ProfileScreen()
         }
         composable(NavigationItem.Login.route) {
-            LoginScreen()
+            LoginScreen(navController)
         }
     }
 }
@@ -108,6 +108,8 @@ fun BottomNavigationBar(navController: NavController) {
     NavigationBar {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
+
+
 
         items.forEach { item ->
             NavigationBarItem(

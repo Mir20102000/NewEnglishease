@@ -103,14 +103,11 @@ private val DarkColors = darkColorScheme(
 //  )
 //}
 
-
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
-    activity: Activity = LocalContext.current as MainActivity,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -131,45 +128,80 @@ fun AppTheme(
         }
     }
 
-    val window = calculateWindowSizeClass(activity = activity)
-    val config = LocalConfiguration.current
-
-    var typography = CompactTypography
-    var appDimens = CompactDimens
-
-    when (window.widthSizeClass) {
-        WindowWidthSizeClass.Compact -> {
-            if (config.screenWidthDp <= 360) {
-                appDimens = CompactSmallDimens
-                typography = CompactSmallTypography
-            } else if (config.screenWidthDp < 599) {
-                appDimens = CompactMediumDimens
-                typography = CompactMediumTypography
-            } else {
-                appDimens = CompactDimens
-                typography = CompactTypography
-            }
-        }
-
-        WindowWidthSizeClass.Medium -> {
-            appDimens = MediumDimens
-            typography = MediumTypography
-        }
-
-        else -> {
-            appDimens = ExpandedDimens
-            typography = ExpandedTypography
-        }
-    }
-
-    AppUtils(appDimens = appDimens) {
-        MaterialTheme(
-            colorScheme = colorScheme,
-            typography = typography,
-            content = content
-        )
-    }
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = Typography,
+        content = content
+    )
 }
+
+
+//@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+//@Composable
+//fun AppTheme(
+//    darkTheme: Boolean = isSystemInDarkTheme(),
+//    // Dynamic color is available on Android 12+
+//    dynamicColor: Boolean = true,
+//    activity: Activity = LocalContext.current as MainActivity,
+//    content: @Composable () -> Unit
+//) {
+//    val colorScheme = when {
+//        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+//            val context = LocalContext.current
+//            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+//        }
+//
+//        darkTheme -> DarkColors
+//        else -> LightColors
+//    }
+//    val view = LocalView.current
+//    if (!view.isInEditMode) {
+//        SideEffect {
+//            val window = (view.context as Activity).window
+//            window.statusBarColor = colorScheme.primary.toArgb()
+//            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+//        }
+//    }
+//
+//    val window = calculateWindowSizeClass(activity = activity)
+//    val config = LocalConfiguration.current
+//
+//    var typography = CompactTypography
+//    var appDimens = CompactDimens
+//
+//    when (window.widthSizeClass) {
+//        WindowWidthSizeClass.Compact -> {
+//            if (config.screenWidthDp <= 360) {
+//                appDimens = CompactSmallDimens
+//                typography = CompactSmallTypography
+//            } else if (config.screenWidthDp < 599) {
+//                appDimens = CompactMediumDimens
+//                typography = CompactMediumTypography
+//            } else {
+//                appDimens = CompactDimens
+//                typography = CompactTypography
+//            }
+//        }
+//
+//        WindowWidthSizeClass.Medium -> {
+//            appDimens = MediumDimens
+//            typography = MediumTypography
+//        }
+//
+//        else -> {
+//            appDimens = ExpandedDimens
+//            typography = ExpandedTypography
+//        }
+//    }
+//
+//    AppUtils(appDimens = appDimens) {
+//        MaterialTheme(
+//            colorScheme = colorScheme,
+//            typography = typography,
+//            content = content
+//        )
+//    }
+//}
 
 val MaterialTheme.dimens
     @Composable
