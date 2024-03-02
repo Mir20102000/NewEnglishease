@@ -43,10 +43,9 @@ import com.example.englishease.ui.registration.RegistrationScreen
 fun MainScreen() {
     val navController = rememberNavController()
 
-    // State of bottomBar, set state to false, if current page route is "car_details"
+
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
 
-    // State of topBar, set state to false, if current page route is "car_details"
     val topBarState = rememberSaveable { (mutableStateOf(true)) }
 
     // Subscribe to navBackStackEntry, required to get current route
@@ -132,6 +131,9 @@ fun Navigation(navController: NavHostController) {
         }
         composable(NavigationItem.Registration.route) {
             RegistrationScreen()
+        }
+        composable(NavigationItem.ChooseCourse.route) {
+            TODO()
         }
     }
 }

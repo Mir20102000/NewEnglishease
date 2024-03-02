@@ -41,13 +41,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.englishease.ui.theme.Black
+//import com.example.englishease.ui.theme.Black
 import com.example.englishease.R
 import com.example.englishease.ui.NavigationItem
-import com.example.englishease.ui.theme.BlueGray
+//import com.example.englishease.ui.theme.BlueGray
 //import com.example.englishease.ui.theme.Roboto
 import com.example.englishease.ui.theme.ScreenOrientation
-import com.example.englishease.ui.theme.dimens
+//import com.example.englishease.ui.theme.dimens
 
 @Composable
 fun LoginScreen(navController: NavHostController) {
@@ -82,7 +82,7 @@ private fun PortraitLoginScreen(navController: NavHostController) {
             .verticalScroll(rememberScrollState())
     ) {
         TopSection()
-        Spacer(modifier = Modifier.height(MaterialTheme.dimens.medium2))
+        Spacer(modifier = Modifier.height(36.dp))
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -91,7 +91,7 @@ private fun PortraitLoginScreen(navController: NavHostController) {
 
             LoginSection(navController)
 
-            Spacer(modifier = Modifier.height(MaterialTheme.dimens.medium1))
+            Spacer(modifier = Modifier.height(30.dp))
 
             SocialMediaSection()
 
@@ -104,7 +104,7 @@ private fun PortraitLoginScreen(navController: NavHostController) {
 
 @Composable
 private fun ColumnScope.CreateAccountSection(navController: NavHostController) {
-    val uiColor = if (isSystemInDarkTheme()) Color.White else Black
+//    val uiColor = if (isSystemInDarkTheme()) Color.White else Black
 
     Row(
         modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
@@ -182,7 +182,7 @@ private fun SocialMediaSection() {
 
             }
 
-            Spacer(modifier = Modifier.width(MaterialTheme.dimens.small3))
+            Spacer(modifier = Modifier.width(10.dp))
 
             SocialMediaLogIn(
                 icon = R.drawable.facebook,
@@ -204,7 +204,7 @@ private fun LoginSection(navController: NavHostController) {
         modifier = Modifier.fillMaxWidth()
     )
 
-    Spacer(modifier = Modifier.height(MaterialTheme.dimens.small2))
+    Spacer(modifier = Modifier.height(15.dp))
 
     LoginTextField(
         label = "Password",
@@ -212,20 +212,20 @@ private fun LoginSection(navController: NavHostController) {
         modifier = Modifier.fillMaxWidth()
     )
 
-    Spacer(modifier = Modifier.height(MaterialTheme.dimens.small3))
+    Spacer(modifier = Modifier.height(20.dp))
 
     Button(
         modifier = Modifier
             .fillMaxWidth()
-            .height(MaterialTheme.dimens.buttonHeight),
+            .height(40.dp),
         onClick = {
             // problem here
             navController.navigate(NavigationItem.Lessons.route)
         },
-        colors = ButtonDefaults.buttonColors(
-            containerColor = if (isSystemInDarkTheme()) BlueGray else Black,
-            contentColor = Color.White
-        ),
+//        colors = ButtonDefaults.buttonColors(
+//            containerColor = if (isSystemInDarkTheme()) BlueGray else Black,
+//            contentColor = Color.White
+//        ),
         shape = RoundedCornerShape(size = 4.dp)
     ) {
         Text(
@@ -237,7 +237,7 @@ private fun LoginSection(navController: NavHostController) {
 
 @Composable
 private fun TopSection() {
-    val uiColor = if (isSystemInDarkTheme()) Color.White else Black
+//    val uiColor = if (isSystemInDarkTheme()) Color.White else Black
     val screenHeight = LocalConfiguration.current.screenHeightDp
 
     Box(
@@ -257,22 +257,22 @@ private fun TopSection() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                modifier = Modifier.size(MaterialTheme.dimens.logoSize),
+                modifier = Modifier.size(42.dp),
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = stringResource(R.string.app_logo),
-                tint = uiColor
+//                tint = uiColor
             )
             Spacer(modifier = Modifier.width(15.dp))
             Column {
                 Text(
                     text = stringResource(id = R.string.the_tolet),
                     style = MaterialTheme.typography.headlineMedium,
-                    color = uiColor
+//                    color = uiColor
                 )
                 Text(
                     text = stringResource(id = R.string.find_house),
                     style = MaterialTheme.typography.titleMedium,
-                    color = uiColor
+//                    color = uiColor
                 )
             }
         }
@@ -282,7 +282,7 @@ private fun TopSection() {
                 .align(alignment = Alignment.BottomCenter),
             text = stringResource(id = R.string.login),
             style = MaterialTheme.typography.headlineLarge,
-            color = uiColor
+//            color = uiColor
         )
     }
 }

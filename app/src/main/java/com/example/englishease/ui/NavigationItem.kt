@@ -35,4 +35,10 @@ sealed class NavigationItem(
         icon = R.drawable.book, // can't pass null
         title = "Registration"
     )
+
+    object ChooseCourse : NavigationItem(
+        route = "choose_course",
+        icon = R.drawable.book, // can't pass null
+        title = "Choose course"
+    )
 }
