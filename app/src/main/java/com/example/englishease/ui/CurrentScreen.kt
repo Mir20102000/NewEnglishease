@@ -14,7 +14,6 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -33,14 +32,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.englishease.R
-import com.example.englishease.ui.lessons.LessonsScreen
-import com.example.englishease.ui.login.LoginScreen
-import com.example.englishease.ui.practise.PracticeScreen
-import com.example.englishease.ui.profile.ProfileScreen
-import com.example.englishease.ui.registration.RegistrationScreen
+import com.example.englishease.ui.screens.lessons.LessonsScreen
+import com.example.englishease.ui.screens.login.LoginScreen
+import com.example.englishease.ui.screens.practise.PracticeScreen
+import com.example.englishease.ui.screens.profile.ProfileScreen
+import com.example.englishease.ui.screens.registration.RegistrationScreen
 
 @Composable
-fun MainScreen() {
+fun CurrentScreen() {
     val navController = rememberNavController()
 
 
@@ -54,6 +53,12 @@ fun MainScreen() {
     // Control TopBar and BottomBar
     when (navBackStackEntry?.destination?.route) {
         "login" -> {
+            // Hide BottomBar and TopBar
+            bottomBarState.value = false
+            topBarState.value = false
+        }
+
+        "choose_course" -> {
             // Hide BottomBar and TopBar
             bottomBarState.value = false
             topBarState.value = false

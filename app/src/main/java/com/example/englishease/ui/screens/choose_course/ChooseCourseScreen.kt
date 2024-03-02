@@ -1,4 +1,4 @@
-package com.example.englishease.ui.choose_course
+package com.example.englishease.ui.screens.choose_course
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement

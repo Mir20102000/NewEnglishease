@@ -1,4 +1,4 @@
-package com.example.englishease.ui.practise
+package com.example.englishease.ui.screens.practise
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

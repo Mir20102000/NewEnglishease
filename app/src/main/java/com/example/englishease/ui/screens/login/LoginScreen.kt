@@ -1,4 +1,4 @@
-package com.example.englishease.ui.login
+package com.example.englishease.ui.screens.login
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image

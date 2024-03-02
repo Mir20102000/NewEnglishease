@@ -1,4 +1,4 @@
-package com.example.englishease.ui.profile
+package com.example.englishease.ui.screens.registration
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ProfileScreen(modifier: Modifier = Modifier) {
+fun RegistrationScreen(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
