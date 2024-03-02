@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -96,40 +97,66 @@ private fun PortraitLoginScreen(navController: NavHostController) {
 
         }
         Spacer(modifier = Modifier.weight(0.8f))
-        CreateAccountSection()
+        CreateAccountSection(navController)
         Spacer(modifier = Modifier.weight(0.3f))
     }
 }
 
 @Composable
-private fun ColumnScope.CreateAccountSection() {
+private fun ColumnScope.CreateAccountSection(navController: NavHostController) {
     val uiColor = if (isSystemInDarkTheme()) Color.White else Black
-    Text(
-        modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
-        text = buildAnnotatedString {
-            withStyle(
-                style = SpanStyle(
-                    color = Color(0XFF64748B),
-                    fontSize = MaterialTheme.typography.labelMedium.fontSize,
+
+    Row(
+        modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
+    ) {
+        Text(
+            text = buildAnnotatedString {
+                withStyle(
+                    style = SpanStyle(
+                        color = Color(0XFF64748B),
+                        fontSize = MaterialTheme.typography.labelMedium.fontSize,
 //                    fontFamily = Roboto,
-                    fontWeight = FontWeight.Normal
-                )
-            ) {
-                append("Don't have an account?")
-            }
-            withStyle(
-                style = SpanStyle(
-                    color = uiColor,
-                    fontSize = MaterialTheme.typography.labelMedium.fontSize,
+                        fontWeight = FontWeight.Normal
+                    )
+                ) {
+                    append("Don't have an account? ")
+                }
+            },
+            modifier = Modifier.alignByBaseline()
+        )
+
+        ClickableText(
+            text = buildAnnotatedString {
+                withStyle(
+                    style = SpanStyle(
+                        color = Color(0XFF64748B),
+                        fontSize = MaterialTheme.typography.labelMedium.fontSize,
 //                    fontFamily = Roboto,
-                    fontWeight = FontWeight.Normal
-                )
-            ) {
-                append(" ")
-                append("Create now")
-            }
-        }
-    )
+                        fontWeight = FontWeight.Bold
+                    )
+                ) {
+                    append("Create now")
+                }
+            },
+            onClick = { navController.navigate(NavigationItem.Registration.route) },
+            modifier = Modifier.alignByBaseline()
+        )
+    }
+
+
+//            withStyle(
+//                style = SpanStyle(
+//                    color = uiColor,
+//                    fontSize = MaterialTheme.typography.labelMedium.fontSize,
+////                    fontFamily = Roboto,
+//                    fontWeight = FontWeight.Normal
+//                )
+//            ) {
+//                append(" ")
+//                append("Create now")
+//            }
+
+
 }
 
 @Composable
@@ -194,7 +221,7 @@ private fun LoginSection(navController: NavHostController) {
         onClick = {
             // problem here
             navController.navigate(NavigationItem.Lessons.route)
-                  },
+        },
         colors = ButtonDefaults.buttonColors(
             containerColor = if (isSystemInDarkTheme()) BlueGray else Black,
             contentColor = Color.White
